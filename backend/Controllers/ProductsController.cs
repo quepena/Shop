@@ -1,41 +1,33 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace backend.Controllers
 {
-    [Route("[controller]")]
-    public class ProductsController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductsController : ControllerBase
     {
-        private readonly ILogger<ProductsController> _logger;
+        private readonly IConfiguration _configuration;
 
-        // IMongoCollection<Products> Products;
-        public ProductsController(ILogger<ProductsController> logger)
+        public ProductsController(IConfiguration configuration)
         {
-            _logger = logger;
+            _configuration = configuration;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public JsonResult GetProducts()
         {
-            return View();
-        }
+            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("ShopDB"));
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+            var productsList = dbClient.GetDatabase("Shop").GetCollection<ProductsModel>("Products").AsQueryable(); 
 
-        // [HttpGet]
-        // public async Task<IEnumerable<ProductsModel>> GetProducts()
-        // {
-        //     return await Products.ToListAsync();
-        // }
+            return new JsonResult(productsList);
+        }
     }
 }
