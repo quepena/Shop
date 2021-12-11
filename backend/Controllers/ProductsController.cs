@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backend.Models;
+using backend.Data;
+using backend.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -13,21 +13,23 @@ namespace backend.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly DataContext context;
 
-        public ProductsController(IConfiguration configuration)
+        public ProductsController(DataContext context)
         {
-            _configuration = configuration;
+            this.context = context;
         }
 
         [HttpGet]
-        public JsonResult GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            MongoClient dbClient = new MongoClient(_configuration.GetConnectionString("ShopDB"));
+            return await this.context.Products.ToListAsync();
+        }
 
-            var productsList = dbClient.GetDatabase("Shop").GetCollection<ProductsModel>("Products").AsQueryable(); 
-
-            return new JsonResult(productsList);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(int id)
+        {
+            return await this.context.Products.FindAsync(id);
         }
     }
 }
