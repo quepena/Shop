@@ -6,7 +6,7 @@ import { Product } from '../models/product';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    Authorization: 'Bearer' + JSON.parse(localStorage.getItem('user') as string).token
+    Authorization: 'Bearer' + JSON.parse(localStorage.getItem('user') || '{}').token
   })
 }
 
@@ -22,7 +22,7 @@ export class ProductsService {
     return this.http.get<Product[]>(this.baseUrl+'products', httpOptions)
   }
 
-  getProduct(id: number) {
+  getProduct(id:string) {
     return this.http.get<Product>(this.baseUrl+'products/'+id, httpOptions)
   }
 }

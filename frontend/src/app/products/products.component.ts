@@ -13,7 +13,7 @@ import { ProductsService } from '../services/products.service';
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private http: HttpClient, private router: Router, private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
     this.getProducts()

@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RegisterComponent } from './register/register.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegisterComponent } from './register/register.component';
     ProductsComponent,
     ProductDetailsComponent,
     NavComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

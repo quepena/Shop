@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="d-flex justify-content-start">
+        <div *ngFor="let category of categories" class="card">
+            <a routerLink='/categories/{{category.id}}' class="btn-primary" style="width: 50vh;">{{category.name}}</a>
+        </div>
+    </div>
+</div>
