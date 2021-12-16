@@ -23,12 +23,5 @@ namespace backend.Controllers
         {
             return await this.context.Categories.OrderBy(i => i.Name).ToListAsync();
         }
-
-        [HttpGet("id")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
-        {
-            // var product = await this.context.Products.FindAsync()
-            return await this.context.Categories.FindAsync(id);
-        }
     }
 }

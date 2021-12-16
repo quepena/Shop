@@ -29,5 +29,13 @@ namespace backend.Controllers
         {
             return await this.context.Products.FindAsync(id);
         }
+
+        
+        [HttpGet("category/{id}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(int id)
+        {
+            // var products = ;
+            return await this.context.Products.Where(d => d.CategoryId == id).ToListAsync();
+        }
     }
 }

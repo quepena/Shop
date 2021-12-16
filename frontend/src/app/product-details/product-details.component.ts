@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductsService } from '../services/products.service';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-details',
@@ -10,6 +11,7 @@ import { ProductsService } from '../services/products.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
+  faShoppingCart = faShoppingCart;
 
   constructor(private productService: ProductsService, private route: ActivatedRoute) { }
 

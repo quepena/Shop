@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 import { ProductsService } from '../services/products.service';
@@ -13,14 +13,14 @@ import { ProductsService } from '../services/products.service';
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private route: ActivatedRoute, private productsService: ProductsService) { }
 
   ngOnInit() {
     this.getProducts()
   }
 
   getProducts() {
-    this.productsService.getProducts().subscribe(products => {
+    this.productsService.getProducts(this.route.snapshot.paramMap.get('categoryId') || '').subscribe(products => {
       this.products = products;
     })
   }

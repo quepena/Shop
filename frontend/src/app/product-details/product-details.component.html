@@ -1,1 +1,6 @@
-<h1 *ngIf="product">{{product.name}}</h1>
+<div *ngIf="product" class="container">
+    <h2>{{product.name}}</h2>
+    <img src="" alt="">
+    <div>{{product.description}}</div>
+    <button class="btn-primary"><fa-icon [icon]="faShoppingCart" size="2x"></fa-icon>Add to card</button>
+</div>
