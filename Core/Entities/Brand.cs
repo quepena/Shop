@@ -4,14 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace backend.Entities
+namespace Core.Entities
 {
-    public class Category
+
+    public class Brand : BaseEntity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
         public ICollection<Product> Products { get; set; }
     }
 }
