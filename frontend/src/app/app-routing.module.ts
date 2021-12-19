@@ -8,8 +8,7 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   // {path: 'products', component: ProductsComponent, pathMatch: 'full'},
   {path: 'products/:id', component: ProductDetailsComponent},
-  {path: 'categories', component: CategoriesComponent, pathMatch: 'full'},
-  {path: 'categories/:categoryId', component: ProductsComponent},
+  {path: 'products', component: ProductsComponent},
   // {path: '**', component: ProductsComponent, pathMatch: 'full'},
   {path: 'account/register', component: RegisterComponent, pathMatch: 'full'}
 ];

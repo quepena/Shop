@@ -73,13 +73,7 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BrandId1")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoryId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("CountInStock")
@@ -112,11 +106,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("BrandId1");
-
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
 
                     b.ToTable("Products");
                 });
@@ -129,33 +119,15 @@ namespace Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Brand", null)
-                        .WithMany("Products")
-                        .HasForeignKey("BrandId1");
-
                     b.HasOne("Core.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Category", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId1");
-
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Core.Entities.Brand", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Core.Entities.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

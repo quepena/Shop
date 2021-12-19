@@ -62,9 +62,7 @@ namespace Infrastructure.Data.Migrations
                     Price = table.Column<double>(type: "decimal(20,2)", nullable: false),
                     CountInStock = table.Column<long>(type: "INTEGER", nullable: false),
                     Rating = table.Column<double>(type: "REAL", nullable: false),
-                    NumReviews = table.Column<long>(type: "INTEGER", nullable: false),
-                    BrandId1 = table.Column<int>(type: "INTEGER", nullable: true),
-                    CategoryId1 = table.Column<int>(type: "INTEGER", nullable: true)
+                    NumReviews = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,23 +74,11 @@ namespace Infrastructure.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId1",
-                        column: x => x.BrandId1,
-                        principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -101,19 +87,9 @@ namespace Infrastructure.Data.Migrations
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BrandId1",
-                table: "Products",
-                column: "BrandId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId1",
-                table: "Products",
-                column: "CategoryId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
