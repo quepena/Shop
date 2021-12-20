@@ -1,5 +1,4 @@
-<div class="d-flex justify-content-around">
-    <app-categories></app-categories>
+<!-- <div class="d-flex justify-content-around">
     <div class="d-flex flex-wrap">
         <div *ngFor="let product of products" class="" style="margin-top: 10vh;">
             <div class="card" style="width: 30vh; margin-right: 2vh; margin-left: 2vh;">
@@ -7,5 +6,68 @@
                 <button routerLink='/products/{{product.id}}' class="btn-primary">Go to product</button>
             </div>
         </div>
+    </div>
+</div> -->
+<div class="container" style="position: relative; top: 5vh">
+    <div class="row">
+        <section class="col-3">
+            <h4 class="text-dark" style="margin-top: 5vh;">Sort</h4>
+            <select class="custom-select" style="margin-top: 3vh;" (change)="sortSelected($event.target.value)">
+                <option *ngFor="let sort of sortOptions" [value]="sort.value">{{sort.name}}</option>
+            </select>
+            <h4 class="text-dark" style="margin-top: 5vh;">Categories</h4>
+            <ul class="list-group" style="margin-top: 3vh;">
+                <li *ngFor="let category of categories" [class.active]="category.id === this.productParameters.categoryId"
+                    [value]="category.id" (click)="categorySelected(category.id)" class="list-group-item">
+                    {{category.name}}</li>
+            </ul>
+            <h4 class="text-dark" style="margin-top: 5vh;">Brands</h4>
+            <ul class="list-group" style="margin-top: 3vh;">
+                <li *ngFor="let brand of brands" [class.active]="brand.id === this.productParameters.brandId" [value]="brand.id"
+                    (click)="brandSelected(brand.id)" class="list-group-item">{{brand.name}}</li>
+            </ul>
+        </section>
+
+        <section class="col-9" style="margin-top: 5vh;">
+            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 3vh;">
+                <header>
+                    <span>Showing <strong>10</strong> of <strong>15</strong> Results</span>
+                </header>
+                <div class="form-inline">
+                    <input class="form-control mr-3" style="width: 40vh" type="text" placeholder="Search">
+                    <button class="btn btn-outline-primary">Search</button>
+                    <button class="btn btn-outline-info ml-3">Reset</button>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" *ngFor="let product of products">
+                    <div class="card shadow-sm" routerLink='/products/{{product.id}}'>
+                        <img src="{{product.image}}" alt=""
+                            style="height: 25vh; margin: 2vh; border: 2px solid gainsboro; padding: 2vh; border-radius: 2px;">
+
+                        <div class="card-body">
+                            <h4>{{product.name}}</h4>
+                            <h5>{{product.price}}</h5>
+                            <p class="card-text">{{product.description}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" style="width: 10vh;">
+                                        <fa-icon [icon]="faShoppingCart" size="2x"></fa-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center" style="margin: 3vh;">
+                <pagination [boundaryLinks]="true" [totalItems]="this.totalCount" previousText="&lsaquo;" nextText="&rsaquo;"
+                    firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)" [itemsPerPage]="this.productParameters.pageSize">
+                </pagination>
+            </div>
+
+        </section>
     </div>
 </div>

@@ -13,6 +13,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RegisterComponent } from './register/register.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
+    PaginationModule.forRoot(),
+  ],
+  exports: [
+    PaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

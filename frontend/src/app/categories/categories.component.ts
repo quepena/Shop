@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models/category';
+// import { ICategory } from '../models/category';
 import { CategoriesService } from '../services/categories.service';
 
 @Component({
@@ -8,18 +8,18 @@ import { CategoriesService } from '../services/categories.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  categories: Category[] = [];
+  // categories: ICategory[] = [];
 
   constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.getCategories()
+    // this.getCategories()
   }
 
-  getCategories() {
-    this.categoriesService.getCategories().subscribe(categories => {
-      this.categories = categories;
-    })
-  }
+  // getCategories() {
+  //   this.categoriesService.getCategories().subscribe(categories => {
+  //     this.categories = categories;
+  //   })
+  // }
 
 }

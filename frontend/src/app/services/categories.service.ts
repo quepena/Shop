@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Category } from '../models/category';
+// import { ICategory } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories() {
-    return this.http.get<Category[]>(this.baseUrl+'categories')
-  }
+  // getCategories() {
+  //   return this.http.get<Category[]>(this.baseUrl+'categories')
+  // }
 
-  getCategory(id: string) {
-    return this.http.get<Category>(this.baseUrl+'categories/'+id)
-  }
+  // getCategory(id: string) {
+  //   return this.http.get<Category>(this.baseUrl+'categories/'+id)
+  // }
 }
