@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { IPagination } from '../models/pagination';
@@ -16,6 +16,7 @@ import { ProductParameters } from '../models/productParameters';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  @ViewChild('search', {static: true}) searchTerm: ElementRef | undefined;
   products: IProduct[] = [];
   brands: IBrand[] = [];
   categories: ICategory[] = [];
@@ -76,11 +77,13 @@ export class ProductsComponent implements OnInit {
 
   brandSelected(brandId: number) {
     this.productParameters.brandId = brandId;
+    this.productParameters.pageNumber = 1;
     this.getProducts();
   }
 
   categorySelected(categoryId: number) {
     this.productParameters.categoryId = categoryId;
+    this.productParameters.pageNumber = 1;
     this.getProducts();
   }
 
@@ -90,7 +93,23 @@ export class ProductsComponent implements OnInit {
   }
 
   pageChanged(event: any) {
-    this.productParameters.pageNumber = event.page;
-    this.getProducts(); 
+    if(this.productParameters.pageNumber !== event.page) {
+      this.productParameters.pageNumber = event.page;
+      this.getProducts();
+    }
+  }
+
+  onSearch() {
+    this.productParameters.search = this.searchTerm?.nativeElement.value;
+    this.productParameters.pageNumber = 1;
+    this.getProducts();
+  }
+
+  reset() {
+    if(this.searchTerm?.nativeElement) {
+      this.searchTerm.nativeElement.value = '';
+    }
+    this.productParameters = new ProductParameters();
+    this.getProducts();
   }
 }

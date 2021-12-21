@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from '../models/product';
 import { ProductsService } from '../services/products.service';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-details',
@@ -12,6 +12,8 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 export class ProductDetailsComponent implements OnInit {
   product: IProduct | undefined;
   faShoppingCart = faShoppingCart;
+  faMinusCircle = faMinusCircle;
+  faPlusCircle = faPlusCircle;
 
   constructor(private productService: ProductsService, private route: ActivatedRoute) { }
 

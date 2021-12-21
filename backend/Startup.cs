@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using backend.Helpers;
 using backend.Middleware;
 using backend.Extensions;
+using StackExchange.Redis;
 
 namespace backend
 {
@@ -30,6 +31,10 @@ namespace backend
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
+            services.AddSingleton<ConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
             });
             services.AddControllers();
             services.AddAppServices();

@@ -38,6 +38,10 @@ export class ProductsService {
       params = params.append('categoryId', productParameters.categoryId.toString());
     }
 
+    if(productParameters.search) {
+      params = params.append('search', productParameters.search);
+    }
+
     params = params.append('sort', productParameters.sort);
     params = params.append('pageIndex', productParameters.pageNumber.toString());
     params = params.append('pageIndex', productParameters.pageSize.toString());
