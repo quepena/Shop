@@ -11,12 +11,12 @@ namespace Core.Entities
         {
         }
 
-        public Cart(int id)
+        public Cart(string id)
         {
             Id = id;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public List<CartItem> Items { get; set; } = new List<CartItem>();
     }
 }

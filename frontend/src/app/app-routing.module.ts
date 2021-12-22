@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'products', component: ProductsComponent},
   // {path: '**', component: ProductsComponent, pathMatch: 'full'},
-  {path: 'account/register', component: RegisterComponent, pathMatch: 'full'}
+  {path: 'account/register', component: RegisterComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

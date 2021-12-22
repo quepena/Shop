@@ -12,6 +12,7 @@ using backend.Helpers;
 using backend.Middleware;
 using backend.Extensions;
 using StackExchange.Redis;
+using Core.Interfaces;
 
 namespace backend
 {
@@ -32,10 +33,11 @@ namespace backend
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddSingleton<ConnectionMultiplexer>(c => {
-                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
+            services.AddSingleton<IConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(this.Configuration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
+            services.AddScoped<ICartRepository, CartRepository>();
             services.AddControllers();
             services.AddAppServices();
             services.AddCors();
