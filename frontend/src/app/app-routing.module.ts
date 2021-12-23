@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'products', component: ProductsComponent},
   // {path: '**', component: ProductsComponent, pathMatch: 'full'},
   {path: 'account/register', component: RegisterComponent, pathMatch: 'full'},
+  {path: 'cart', loadChildren: () => import('./cart/cart.module').then(mod => mod.CartModule)},
 ];
 
 @NgModule({
