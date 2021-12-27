@@ -19,6 +19,7 @@ export class CartService {
   getCart(id: string) {
     return this.http.get<ICart>(this.baseUrl + 'cart?id=' + id).pipe(map((cart: ICart) => {
       this.cartSource.next(cart);
+      console.log(this.getCurrentCartValue());
     }));
   }
 
@@ -26,7 +27,6 @@ export class CartService {
     return this.http.post<ICart>(this.baseUrl + 'cart', cart).subscribe((response: ICart) => {
       this.cartSource.next(response);
       console.log(response);
-      
     }, error => {
       console.log(error);
     })
@@ -36,18 +36,14 @@ export class CartService {
     return this.cartSource.value;
   }
 
-
-  //??????
-  // addItem(item: IProduct, quantity = 1) {
-  //   const itemToAdd: ICartItem = this.mapProductItemToCartItem(item, quantity);
-  //   const cart = this.getCurrentCartValue() ?? this.createCart();
-  //   if (cart) {
-  //     if(!cart?.items) { //?????
-  //       this.addOrUpdateItem(cart.items, itemToAdd, quantity);
-  //       this.setCart(cart);
-  //      }
-  //   }
-  // }
+  addItem(item: IProduct, quantity = 1) {
+    const itemToAdd: ICartItem = this.mapProductItemToCartItem(item, quantity);
+    const cart = this.getCurrentCartValue() ?? this.createCart();
+    if (cart) {
+      this.addOrUpdateItem(cart.items, itemToAdd, quantity);
+      this.setCart(cart);
+    }
+  }
 
   private addOrUpdateItem(items: ICartItem[], itemToAdd: ICartItem, quantity: number): ICartItem[] | undefined {
     const index = items.findIndex(i => i.id === itemToAdd.id);

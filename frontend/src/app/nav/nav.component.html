@@ -14,7 +14,8 @@
                 </li> -->
             </ul>
             <div style="display: flex; flex-wrap: nowrap;">
-                <button class="btn-primary"><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</button>
+                <div *ngIf="(cart$ | async) as cart">{{cart.items.length}}</div>
+                <button class="btn-primary" routerLink="products/cart/cart" routerLinkActive="router-link-active" ><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</button>
                 <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
                     <a class="dropdown-toggle text-light" dropdownToggle>Welcome!</a>
                     <div class="dropdown-menu" *dropdownMenu>

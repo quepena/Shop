@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { CartService } from '../cart/cart.service';
+import { ICart } from '../models/cart';
 
 @Component({
   selector: 'app-nav',
@@ -12,10 +14,14 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 export class NavComponent implements OnInit {
   model: any = {}
   faShoppingCart = faShoppingCart
+  cart$: Observable<ICart> | undefined;
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private cartService: CartService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    if(this.cart$) {
+      // this.cart$ = this.cartService.cart$;
+    }
   }
 
   login() {

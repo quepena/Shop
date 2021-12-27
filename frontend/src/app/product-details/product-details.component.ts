@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IProduct } from '../models/product';
 import { ProductsService } from '../services/products.service';
 import { faShoppingCart, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   faMinusCircle = faMinusCircle;
   faPlusCircle = faPlusCircle;
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductsService, private route: ActivatedRoute, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -25,5 +26,11 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getProduct(this.route.snapshot.paramMap.get('id') || '').subscribe(product => {
       this.product = product;
     })
+  }
+
+  addItem() {
+    if(this.product) {
+      this.cartService.addItem(this.product);
+    }
   }
 }
