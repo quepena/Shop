@@ -14,14 +14,12 @@ import { ICart } from '../models/cart';
 export class NavComponent implements OnInit {
   model: any = {}
   faShoppingCart = faShoppingCart
-  cart$: Observable<ICart> | undefined;
+  cart$: Observable<ICart>;
 
   constructor(public accountService: AccountService, private cartService: CartService) { }
 
   ngOnInit() {
-    if(this.cart$) {
-      // this.cart$ = this.cartService.cart$;
-    }
+    // this.cart$ = this.cartService.cart$;
   }
 
   login() {
