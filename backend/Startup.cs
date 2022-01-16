@@ -13,6 +13,8 @@ using backend.Middleware;
 using backend.Extensions;
 using StackExchange.Redis;
 using Core.Interfaces;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace backend
 {
@@ -73,6 +75,13 @@ namespace backend
 
             app.UseStaticFiles();
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Content")
+                ), RequestPath = "/content"
+            });
+
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
@@ -82,6 +91,7 @@ namespace backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

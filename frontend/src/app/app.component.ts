@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from './cart/cart.service';
 import { User } from './models/user';
 import { AccountService } from './services/account.service';
 
@@ -11,21 +10,21 @@ import { AccountService } from './services/account.service';
 export class AppComponent implements OnInit {
   title = 'Shop';
 
-  constructor(private accountService: AccountService, private cartService: CartService) {
+  constructor(private accountService: AccountService) {
 
   }
   ngOnInit(): void {
     this.setCurrentUser();
 
-    const cartId = localStorage.getItem('cart_id');
+    // const cartId = localStorage.getItem('cart_id');
 
-    if(cartId) {
-      this.cartService.getCart(cartId).subscribe(() => {
-        console.log('basket');
-      }, error => {
-        console.log(error);
-      })
-    }
+    // if(cartId) {
+    //   this.cartService.getCart(cartId).subscribe(() => {
+    //     console.log('basket');
+    //   }, error => {
+    //     console.log(error);
+    //   })
+    // }
   }
 
   setCurrentUser() {
