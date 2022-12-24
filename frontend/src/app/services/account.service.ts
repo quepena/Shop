@@ -27,6 +27,18 @@ export class AccountService {
     )
   }
 
+  loginDemo(username: string, password: string) {
+    return this.http.post<User>(this.baseUrl+'account/login', { username, password }).pipe(
+      map((response: User) => {
+        const user = response;
+        if(user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
   register(model: any) {
     return this.http.post<User>(this.baseUrl+"account/register", model).pipe(
       map((user: User) => {

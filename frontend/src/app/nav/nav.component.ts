@@ -27,6 +27,14 @@ export class NavComponent implements OnInit {
     })
   }
 
+  loginDemo() {
+    this.accountService.loginDemo("demo", "demouser").subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    })
+  }
+
   logout() {
     this.accountService.logout();
   }

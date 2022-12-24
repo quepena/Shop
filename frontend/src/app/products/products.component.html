@@ -7,24 +7,27 @@
             </select>
             <h4 class="text-dark" style="margin-top: 5vh;">Categories</h4>
             <ul class="list-group" style="margin-top: 3vh;">
-                <li *ngFor="let category of categories" [class.active]="category.id === this.productParameters.categoryId"
-                    [value]="category.id" (click)="categorySelected(category.id)" class="list-group-item">
+                <li *ngFor="let category of categories"
+                    [class.active]="category.id === this.productParameters.categoryId" [value]="category.id"
+                    (click)="categorySelected(category.id)" class="list-group-item">
                     {{category.name}}</li>
             </ul>
             <h4 class="text-dark" style="margin-top: 5vh;">Brands</h4>
             <ul class="list-group" style="margin-top: 3vh;">
-                <li *ngFor="let brand of brands" [class.active]="brand.id === this.productParameters.brandId" [value]="brand.id"
-                    (click)="brandSelected(brand.id)" class="list-group-item">{{brand.name}}</li>
+                <li *ngFor="let brand of brands" [class.active]="brand.id === this.productParameters.brandId"
+                    [value]="brand.id" (click)="brandSelected(brand.id)" class="list-group-item">{{brand.name}}</li>
             </ul>
         </section>
 
         <section class="col-9" style="margin-top: 5vh;">
             <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 3vh;">
                 <header>
-                    <span *ngIf="totalCount && totalCount > 0">Showing 
+                    <span *ngIf="totalCount && totalCount > 0">Showing
                         <strong>
-                            {{(this.productParameters.pageNumber-1) * this.productParameters.pageSize+1}} - {{this.productParameters.pageNumber * this.productParameters.pageSize > this.totalCount ? this.totalCount : this.productParameters.pageNumber * this.productParameters.pageSize}}
-                        </strong> of 
+                            {{(this.productParameters.pageNumber-1) * this.productParameters.pageSize+1}} -
+                            {{this.productParameters.pageNumber * this.productParameters.pageSize > this.totalCount ?
+                            this.totalCount : this.productParameters.pageNumber * this.productParameters.pageSize}}
+                        </strong> of
                         <strong>
                             {{this.totalCount}}
                         </strong> Results
@@ -32,7 +35,8 @@
                     <h4 *ngIf="totalCount === 0">No results found.</h4>
                 </header>
                 <div class="form-inline">
-                    <input (keyup.enter)="onSearch()" class="form-control mr-3" style="width: 40vh" #search type="text" placeholder="Search">
+                    <input (keyup.enter)="onSearch()" class="form-control mr-3" style="width: 40vh" #search type="text"
+                        placeholder="Search">
                     <button (click)="onSearch()" class="btn btn-outline-primary">Search</button>
                     <button (click)="reset()" class="btn btn-outline-info ml-3">Reset</button>
                 </div>
@@ -41,12 +45,13 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col" *ngFor="let product of products">
                     <div class="card shadow-sm" routerLink='/products/{{product.id}}'>
-                        <img src="{{product.image}}" alt="{{product.name}}"
-                            style="height: 25vh; margin: 2vh; border: 2px solid gainsboro; padding: 2vh; border-radius: 2px;">
+                        <div style="height: 23vh; width: 15vw; margin: 1vh; border: 2px solid gainsboro; padding: 2%; border-radius: 2px;">
+                            <img src="{{product.image}}" alt="{{product.name}}" style="height: 21vh; width: auto; display: block; margin-left: auto; margin-right: auto;">
+                        </div>
 
                         <div class="card-body">
                             <h4>{{product.name}}</h4>
-                            <h5>{{product.price}}</h5>
+                            <h5>${{product.price}}</h5>
                             <p class="card-text">{{product.description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -61,8 +66,9 @@
             </div>
 
             <div class="d-flex justify-content-center" *ngIf="totalCount > 0" style="margin: 3vh;">
-                <pagination [boundaryLinks]="true" [totalItems]="this.totalCount" previousText="&lsaquo;" nextText="&rsaquo;"
-                    firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)" [itemsPerPage]="this.productParameters.pageSize">
+                <pagination [boundaryLinks]="true" [totalItems]="this.totalCount" previousText="&lsaquo;"
+                    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)"
+                    [itemsPerPage]="this.productParameters.pageSize">
                 </pagination>
             </div>
 
